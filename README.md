@@ -1,6 +1,9 @@
 # Nuki Saves
 
-Web interface for downloading content from social media platforms. Consumes the REST API from the [Express backend](../smedia-downloader).
+Web interface for downloading content from social media platforms. Consumes the REST API from the [backend](https://github.com/lgimenez-dev/nuki-saves-back).
+
+<img width="0" height="0" alt="56as4d6asd" src="https://github.com/user-attachments/assets/11526a92-0471-4f22-9d51-6ebfc0954a44" />
+
 
 ---
 
