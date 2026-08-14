@@ -20,11 +20,13 @@ export interface DownloadRequestBody {
   mode: DownloadMode
   resolution?: string
   format?: string
+  videoFormat?: string
   audioOnly?: boolean
   audioFormat?: string
   audioQuality?: number
   noWatermark?: boolean
   writeThumbnail: true
+  captchaToken: string
 }
 
 

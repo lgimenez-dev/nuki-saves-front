@@ -28,7 +28,9 @@ export function useBlobUrl(remoteUrl: string | null): string | null {
     fetch(remoteUrl)
       .then(r => r.blob())
       .then(blob => {
-        if (!active) return
+        if (!active) {
+          return
+        }
         // Force correct MIME if server sends application/octet-stream
         const mime = blob.type && blob.type !== 'application/octet-stream'
           ? blob.type

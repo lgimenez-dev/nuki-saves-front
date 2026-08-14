@@ -2,6 +2,8 @@ import type { DownloadMode, DownloadOptions} from './types'
 
 export const API_BASE = '/api'
 
+export const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string
+
 export const POLL_INTERVAL: Record<DownloadMode, number> = {
   single: 4000,
   multiple: 60000,
@@ -21,7 +23,6 @@ export const VIDEO_FORMATS = [
   { value: 'mp4', label: 'MP4' },
   { value: 'webm', label: 'WebM' },
   { value: 'mkv', label: 'MKV' },
-  { value: 'mov', label: 'MOV' },
 ] as const
 
 export const AUDIO_FORMATS = [

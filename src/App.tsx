@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import './App.css'
-import { API_BASE, RESOLUTIONS, VIDEO_FORMATS, AUDIO_FORMATS, AUDIO_QUALITIES } from './constants'
+import { API_BASE, RECAPTCHA_SITE_KEY, RESOLUTIONS, VIDEO_FORMATS, AUDIO_FORMATS, AUDIO_QUALITIES } from './constants'
 import type { DownloadMode } from './types'
 import { useDownloadOptions } from './hooks/useDownloadOptions'
 import { useDownloadJob } from './hooks/useDownloadJob'
+import { useCaptcha } from './hooks/useCaptcha'
 import { getFileType } from './utils/getFileType'
 import { useBlobUrl } from './hooks/useBlobUrl'
 import pictureCrash from './assets/picture_crash.svg'
@@ -13,19 +15,23 @@ export default function App() {
   const options = useDownloadOptions()
   const { opts, set } = options
   const job = useDownloadJob(opts.mode)
+  const captcha = useCaptcha(job.phase)
 
   const busy = job.phase === 'submitting' || job.phase === 'polling'
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!url.trim()) return
-    job.submit(options.buildBody(url.trim()))
+    if (!url.trim() || !captcha.token) {
+      return;
+    }
+    job.submit(options.buildBody(url.trim(), captcha.token))
   }
 
   const handleReset = () => {
     job.reset()
     options.reset()
     setUrl('')
+    captcha.reset()
   }
 
   const fileUrl = job.result ? `${API_BASE}${job.result.downloadUrl}` : null
@@ -155,10 +161,19 @@ export default function App() {
         </div>
       )}
 
+      <div className="recaptcha-row">
+        <ReCAPTCHA
+          ref={captcha.ref}
+          sitekey={RECAPTCHA_SITE_KEY}
+          onChange={captcha.onChange}
+          onExpired={captcha.onExpired}
+        />
+      </div>
+
       <button
         type="submit"
         form="download-form"
-        disabled={busy || !url.trim()}
+        disabled={busy || !url.trim() || !captcha.token}
         className="submit-btn"
       >
         {busy ? 'Processing…' : 'Search'}
@@ -166,7 +181,7 @@ export default function App() {
 
       {job.phase === 'done' && fileUrl && (
         <div className="result-box">
-          {fileType === 'video' || fileType === 'audio' && <img src={thumbBlob ?? pictureCrash} alt="Preview" className="image-thumbnail" />}
+          {(fileType === 'video' || fileType === 'audio') && <img src={thumbBlob ?? pictureCrash} alt="Preview" className="image-thumbnail" />}
           {fileType === 'image' && <img src={imageBlob ?? pictureCrash} alt="Preview" className="image-thumbnail" />}
           {fileType === 'other' && imageBlob && (<img src={imageBlob ?? pictureCrash} alt="Thumbnail" className="image-thumbnail" />)}
           <div className="result-actions">

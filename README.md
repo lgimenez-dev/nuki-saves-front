@@ -41,7 +41,7 @@ Web interface for downloading content from social media platforms. Consumes the 
 | Option | Applies to | Values |
 |---|---|---|
 | Resolution | Video (single) | Best / 4K / 1080p / 720p / 480p / 360p |
-| Video format | Video (single) | Auto / MP4 / WebM / MKV / MOV |
+| Video format | Video (single) | Auto / MP4 / WebM / MKV |
 | Audio only | Single and multiple | MP3 / AAC / FLAC / Opus / WAV |
 | Audio quality | Audio only | Best (0) → Low (9) |
 | No watermark | Single (TikTok) | on / off |
@@ -73,8 +73,8 @@ Defaults to `http://localhost:3000` if not set.
 ## Development
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Frontend runs at `http://localhost:5173`. Configure CORS on the backend:

@@ -13,9 +13,9 @@ export function useDownloadOptions() {
   const set = <K extends keyof DownloadOptions>(key: K, value: DownloadOptions[K]) =>
     setOpts((prev) => ({ ...prev, [key]: value }));
 
-  const buildBody = (url: string): DownloadRequestBody => {
+  const buildBody = (url: string, captchaToken: string): DownloadRequestBody => {
     const { mode, audioOnly, audioFormat, audioQuality, resolution, videoFormat, noWatermark } = opts;
-    const body: DownloadRequestBody = { url, mode, writeThumbnail: true };
+    const body: DownloadRequestBody = { url, mode, writeThumbnail: true, captchaToken };
     if (audioOnly) {
       body.audioOnly = true;
       body.audioFormat = audioFormat;
@@ -26,7 +26,7 @@ export function useDownloadOptions() {
         body.resolution = resolution;
       }
       if (!audioOnly && videoFormat) {
-        body.format = videoFormat;
+        body.videoFormat = videoFormat;
       }
       if (noWatermark) {
         body.noWatermark = true;

@@ -34,6 +34,12 @@ h1 {
   min-width: 0;
 }
 
+.recaptcha-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .submit-btn {
   display: block;
   margin: 1.5rem auto 0;
