@@ -22,13 +22,10 @@ Web interface for downloading content from social media platforms. Consumes the 
 
 ### Single download (`mode: single`)
 
-| Platform | Video | Audio | No watermark |
-|---|---|---|---|
-| YouTube | ✓ | ✓ | — |
-| TikTok | ✓ | ✓ | ✓ |
-| Instagram | ✓ | ✓ | — |
-| Twitter / X | ✓ | ✓ | — |
-| Facebook | ✓ | ✓ | — |
+| Platform | Video | Audio |
+|---|---|---|
+| YouTube | ✓ | ✓ |
+| Twitter / X | ✓ | ✓ |
 
 ### Playlist / Album (`mode: multiple`) → ZIP
 
@@ -47,7 +44,6 @@ Web interface for downloading content from social media platforms. Consumes the 
 | Video format | Video (single) | Auto / MP4 / WebM / MKV |
 | Audio only | Single and multiple | MP3 / AAC / FLAC / Opus / WAV |
 | Audio quality | Audio only | Best (0) → Low (9) |
-| No watermark | Single (TikTok) | on / off |
 
 ---
 

@@ -8,6 +8,7 @@ import { useDownloadJob } from './hooks/useDownloadJob'
 import { useCaptcha } from './hooks/useCaptcha'
 import { getFileType } from './utils/getFileType'
 import { useBlobUrl } from './hooks/useBlobUrl'
+import { Loader } from './components/Loader'
 import pictureCrash from './assets/picture_crash.svg'
 
 export default function App() {
@@ -44,7 +45,7 @@ export default function App() {
     <main>
       <img src="/favicon.svg" alt="Logo" className="app-logo" />
       <h1>NukiSaves</h1>
-      <p className="platforms">TikTok · Instagram · Twitter/X · Facebook · YouTube</p>
+      <p className="platforms">Twitter/X · YouTube</p>
 
       <form id="download-form" onSubmit={handleSubmit} className="url-form">
         <input
@@ -142,22 +143,9 @@ export default function App() {
         )}
       </div>
 
-      {busy && (
-        <p className="status-msg">
-          {job.phase === 'submitting' ? 'Sending request…' : 'Waiting for download to complete…'}
-        </p>
-      )}
-
       {job.phase === 'polling' && (
         <div className="cancel-row">
-          <button onClick={job.cancel} className="cancel-btn">Cancel</button>
-        </div>
-      )}
-
-      {job.phase === 'failed' && job.error && (
-        <div className="error-box" role="alert">
-          <p>{job.error}</p>
-          <button onClick={handleReset}>Try again</button>
+          <button onClick={job.cancel}>Cancel</button>
         </div>
       )}
 
@@ -178,6 +166,15 @@ export default function App() {
       >
         {busy ? 'Processing…' : 'Search'}
       </button>
+
+      {busy && <Loader />}
+
+      {job.phase === 'failed' && job.error && (
+        <div className="error-box" role="alert">
+          <p>{job.error}</p>
+          <button onClick={handleReset}>Try again</button>
+        </div>
+      )}
 
       {job.phase === 'done' && fileUrl && (
         <div className="result-box">

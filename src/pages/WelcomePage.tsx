@@ -11,7 +11,7 @@ export default function WelcomePage() {
         <h1>NukiSaves</h1>
         <p className="welcome-subtitle">Paste a link from any supported platform and download the video, audio or image</p>
         <span>No accounts, no limits, no watermarks.</span>
-        <p className="welcome-platforms">TikTok · Instagram · Twitter/X · Facebook · YouTube</p>
+        <p className="welcome-platforms">Twitter/X · YouTube</p>
         <button className="start-btn" onClick={() => navigate('/app')}>Start</button>
         <p className="welcome-disclaimer">
           This tool is intended strictly for personal use and educational purposes. Downloading
