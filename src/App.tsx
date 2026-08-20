@@ -143,12 +143,6 @@ export default function App() {
         )}
       </div>
 
-      {job.phase === 'polling' && (
-        <div className="cancel-row">
-          <button onClick={job.cancel}>Cancel</button>
-        </div>
-      )}
-
       <div className="recaptcha-row">
         <ReCAPTCHA
           ref={captcha.ref}
@@ -168,6 +162,12 @@ export default function App() {
       </button>
 
       {busy && <Loader />}
+
+      {job.phase === 'polling' && (
+        <div className="cancel-row">
+          <button onClick={job.cancel}>Cancel</button>
+        </div>
+      )}
 
       {job.phase === 'failed' && job.error && (
         <div className="error-box" role="alert">
